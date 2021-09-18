@@ -61,9 +61,29 @@ class ProviderInfoSpec extends Specification {
     thrown(RuntimeException)
   }
 
-  def 'does not include pending pacts if the option is not present'() {
+  def 'does include pending pacts if the option is not present'() {
     given:
-    def options = [:]
+    def options = [providerTags: ['master']]
+    def url = 'http://localhost:8080'
+    def selectors = [
+      new ConsumerVersionSelector('test', true, null, null)
+    ]
+
+    when:
+    def result = providerInfo.hasPactsFromPactBrokerWithSelectors(options, url, selectors)
+
+    then:
+    pactBrokerClient.fetchConsumersWithSelectors('TestProvider', selectors, ['master'], true, '') >> new Ok([
+      new PactBrokerResult('consumer', '', url, [], [], true, null, false, false)
+    ])
+    result.size == 1
+    result[0].name == 'consumer'
+    result[0].pending
+  }
+
+  def 'does not include pending pacts if the option is present and false'() {
+    given:
+    def options = [enablePending: false]
     def url = 'http://localhost:8080'
     def selectors = [
       new ConsumerVersionSelector('test', true, null, null)

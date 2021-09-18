@@ -7,7 +7,7 @@ data class PactBrokerOptions @JvmOverloads constructor(
    * Enable pending pacts.
    * See https://docs.pact.io/pact_broker/advanced_topics/pending_pacts
    */
-  val enablePending: Boolean = false,
+  val enablePending: Boolean = true,
 
   /**
    * Provider tags. Required if pending pacts are enabled

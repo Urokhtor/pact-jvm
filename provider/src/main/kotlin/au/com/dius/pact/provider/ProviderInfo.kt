@@ -69,7 +69,7 @@ open class ProviderInfo @JvmOverloads constructor (
     pactBrokerUrl: String,
     selectors: List<ConsumerVersionSelector>
   ): List<ConsumerInfo> {
-    val enablePending = Utils.lookupInMap(options, "enablePending", Boolean::class.java, false)
+    val enablePending = Utils.lookupInMap(options, "enablePending", Boolean::class.java, true)
     val providerTags = if (enablePending) {
       options["providerTags"] as List<String>?
     } else {

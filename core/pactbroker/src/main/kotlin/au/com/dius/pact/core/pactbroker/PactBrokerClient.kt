@@ -120,7 +120,7 @@ interface IPactBrokerClient {
     providerName: String,
     selectors: List<ConsumerVersionSelector>,
     providerTags: List<String> = emptyList(),
-    enablePending: Boolean = false,
+    enablePending: Boolean = true,
     includeWipPactsSince: String?
   ): Result<List<PactBrokerResult>, Exception>
 
@@ -279,6 +279,9 @@ open class PactBrokerClient(
       if (includeWipPactsSince.isNotEmpty()) {
         body["includeWipPactsSince"] = includeWipPactsSince
       }
+    } else {
+      logger.warn { "Pending pacts is set to false. We recommend setting enablePending to true. " +
+        "For more information, please see https://docs.pact.io/pending" }
     }
 
     return handleWith {

@@ -52,7 +52,7 @@ open class PactBrokerLoader(
   var authentication: PactBrokerAuth?,
   var valueResolverClass: KClass<out ValueResolver>?,
   valueResolver: ValueResolver? = null,
-  val enablePendingPacts: String = "false",
+  val enablePendingPacts: String = "true",
   val providerTags: List<String> = emptyList(),
   val includeWipPactsSince: String = "",
   val pactBrokerUrl: String? = null,

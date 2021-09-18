@@ -7,7 +7,7 @@ import au.com.dius.pact.core.pactbroker.ConsumerVersionSelector
  */
 data class PactBrokerConsumerConfig @JvmOverloads constructor(
   var selectors: List<ConsumerVersionSelector>? = listOf(),
-  var enablePending: Boolean? = false,
+  var enablePending: Boolean? = true,
   var providerTags: List<String>? = listOf()
 ) {
   companion object {

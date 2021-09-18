@@ -103,7 +103,7 @@ open class GradleProviderInfo(name: String, val project: Project) : ProviderInfo
     brokerConfig = PactBrokerConsumerConfig()
     ConfigureUtil.configure(closure, brokerConfig!!)
 
-    val pending = brokerConfig!!.enablePending ?: false
+    val pending = brokerConfig!!.enablePending ?: true
     if (pending && (brokerConfig!!.providerTags.isNullOrEmpty() ||
       brokerConfig!!.providerTags!!.any { it.trim().isEmpty() })) {
       throw GradleScriptException(
